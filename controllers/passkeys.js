@@ -51,7 +51,10 @@ module.exports.registerVerify = async (req, res, next) => {
       transports: credential.transports,
       expireAt: user.createdAt,
     };
-    await User.create(user);
+    const checkUser = await User.findOne({ username: user.username });
+    if (!checkUser) {
+      await User.create(user);
+    }
     await Passkey.create(newPasskey);
     res.status(201).send(verified);
   } catch (err) {

@@ -13,7 +13,7 @@ module.exports = {
     return generateRegistrationOptions({
       rpName: WEBAUTHN_RP_NAME,
       rpID: WEBAUTHN_RP_ID,
-      origin: origin,
+      origin,
       userName: user.username,
       userDisplayName: user.username,
       userID: isoUint8Array.fromUTF8String(user._id),

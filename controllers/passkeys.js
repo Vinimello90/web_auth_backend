@@ -1,7 +1,6 @@
 const User = require('../models/user');
 const Passkey = require('../models/passkey');
 const UnauthorizedError = require('../utils/errors/UnauthorizedError');
-const ForbiddenError = require('../utils/errors/ForbiddenError');
 const { generateToken } = require('../utils/authTokens');
 const {
   verifyRegistration,
@@ -30,8 +29,8 @@ module.exports.registerVerify = async (req, res, next) => {
   try {
     const { origin } = req.headers;
     const { body } = req;
-    const user = req.session.user;
-    const currentOption = req.session.registrationOptions;
+    const { user } = req.session;
+    const { registrationOptions: currentOption } = req.session;
     const verification = await verifyRegistration(body, currentOption.challenge, origin);
     const { verified } = verification;
 

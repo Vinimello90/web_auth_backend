@@ -20,7 +20,6 @@ module.exports.registerOptions = async (req, res, next) => {
     req.session.user = user;
     res.status(200).send(options);
   } catch (err) {
-    console.log(err);
     next(err);
   }
 };
